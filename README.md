@@ -2,8 +2,10 @@
 Enrichment test based on PCA loadings
 
 Required packages:
-- allez; in bash run R CMD INSTALL allez.tar.gz
-- .db pkgs; in R run
+
+allez; in bash run R CMD INSTALL allez.tar.gz
+
+.db pkgs; in R run
 
 source("http://bioconductor.org/biocLite.R")
 
