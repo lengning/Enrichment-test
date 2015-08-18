@@ -53,8 +53,8 @@ Mat$p.adj <- p.adjust(Mat$p.value, method="BH")
 MatOut=Mat[order(Mat$p.value),c("Term","p.value","p.adj","z.score","set.size","set.mean","set.sd")]
 
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
-write.csv(MatOut,file=paste0(prefix,"_enrichment_allsets.csv"))
-write.csv(LocalOut,file=paste0(prefix,"_enrichment_localsets.csv"))
+write.table(MatOut,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t")
+write.table(LocalOut,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t")
 
 
 
