@@ -32,9 +32,9 @@ is not specified, only GO terms will be considered.
 
 Outputs:
 
-XX_allsets.csv: enrichment results of all gene sets (GO sets + local sets). 
+XX_allsets.txt: enrichment results of all gene sets (GO sets + local sets). 
 
-XX_localsets.csv: enrichment results of only local sets. The summary statistics of these sets are the same as those in the XX_allsets.csv
+XX_localsets.txt: enrichment results of only local sets. The summary statistics of these sets are the same as those in the XX_allsets.txt
 
 The output files contain GO term (NA for local sets), set p value, adjusted p value, z score, set size, set mean and set sd. Sets are sorted by p value. Sets with large absoloute z scores are expected to have small p values.
 
