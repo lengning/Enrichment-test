@@ -38,3 +38,24 @@ XX_localsets.txt: enrichment results of only local sets. The summary statistics 
 
 The output files contain GO term (NA for local sets), set p value, adjusted p value, z score, set size, set mean and set sd. Sets are sorted by p value. Sets with large absoloute z scores are expected to have small p values.
 
+
+## EACI test
+Install EACI package:
+
+in bash
+
+run R CMD INSTALL EACI_0.0.1.tar.gz
+
+
+
+Example commands to run the script:
+- Rscript Enrich_eaci.R ExampleLoading.csv MarkerLists.csv
+- Rscript Enrich_eaci.R ExampleLoading.txt MarkerLists.txt
+- Rscript Enrich_eaci.R ExampleLoading.csv 
+ 
+Outputs
+
+XX_EACIenrichment_allsets.txt
+
+XX_EACIenrichment_localsets.txt
+
