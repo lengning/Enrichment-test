@@ -4,9 +4,10 @@ print(options)
 File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
 Lowersetsize=options[3]
+Uppersetsize=options[4]
 if(length(options)<2)Local=NULL
 if(length(options)<3)Lowersetsize=10
-
+if(length(options)<4)Uppersetsize=800
 
 
 
@@ -53,9 +54,10 @@ Out=easetest(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List, minsets
 
 Mat=Out$setscores[,c("Term","set.size","pval")]
 Mat$p.adj <- p.adjust(Mat$pval, method="BH")
+Mat <- Mat[which(Mat$set.size<Uppersetsize),]
+message("sets with size < ",Lowersetsize, "or > ", Uppersetsize, " are not considered" )
 MatOut=Mat[order(Mat$pval),c("Term","pval","p.adj","set.size")]
 
-message("sets with size < ",Lowersetsize, " are not considered" )
 
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 write.table(MatOut,file=paste0(prefix,"_DavidEASEenrichment_allsets.txt"),sep="\t")

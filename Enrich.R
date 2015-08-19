@@ -4,9 +4,10 @@ print(options)
 File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
 Lowersetsize=options[3]
+Uppersetsize=options[4]
 if(length(options)<2)Local=NULL
 if(length(options)<3)Lowersetsize=10
-
+if(length(options)<4)Uppersetsize=800
 
 
 # csv or txt
@@ -54,10 +55,10 @@ Mat=Out$setscores[,c("Term","set.mean","set.sd","set.size","z.score")]
 Mat$p.value <- pnorm(-abs(Mat$z.score))
 Mat$p.adj <- p.adjust(Mat$p.value, method="BH")
 Mat <- Mat[which(Mat$set.size>Lowersetsize),]
-
+Mat <- Mat[which(Mat$set.size<Uppersetsize),]
 MatOut=Mat[order(Mat$p.value),c("Term","p.value","p.adj","z.score","set.size","set.mean","set.sd")]
 
-message("sets with size < ",Lowersetsize, " are not considered" )
+message("sets with size < ",Lowersetsize, "or > ", Uppersetsize, " are not considered" )
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 write.table(MatOut,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t")
 write.table(LocalOut,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t")
