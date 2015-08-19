@@ -19,6 +19,7 @@ Example commands to run the script:
 - Rscript Enrich.R ExampleLoading.txt MarkerLists.txt
 - Rscript Enrich.R ExampleLoading.csv 
 - Rscript Enrich.R ExampleLoading.txt MarkerLists.txt 20
+- Rscript Enrich.R ExampleLoading.txt MarkerLists.txt 20 500
 
 The 3rd term indicates the name of the loadings (or other scores). 
 The file should contain only one column. Row names should be gene names. Each entry represents loading (or score) 
@@ -31,7 +32,7 @@ Row names are the list names. The number of columns should be N, in which N is t
 For lists with length M - N, the M+1, ..., N's column in that row should be filled with "" or " ". If the 4th term
 is not specified, only GO terms will be considered.
 
-The 5th term defines the threshold to filter out small sets. Default is 10. Sets that are smaller than the threshold are not considered.
+The 5th (6th) term defines the threshold to filter out small(large) sets. Default is 10 (800). Sets that are smaller (larger) than the threshold are not considered.
 
 Outputs:
 
