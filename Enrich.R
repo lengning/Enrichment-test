@@ -3,7 +3,10 @@ options <- commandArgs(trailingOnly = TRUE)
 print(options)
 File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
+Lowersetsize=options[3]
 if(length(options)<2)Local=NULL
+if(length(options)<3)Lowersetsize=10
+
 
 
 # csv or txt
@@ -50,8 +53,11 @@ Out=allez(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List)
 Mat=Out$setscores[,c("Term","set.mean","set.sd","set.size","z.score")]
 Mat$p.value <- pnorm(-abs(Mat$z.score))
 Mat$p.adj <- p.adjust(Mat$p.value, method="BH")
+Mat <- Mat[which(Mat$set.size>Lowersetsize),]
+
 MatOut=Mat[order(Mat$p.value),c("Term","p.value","p.adj","z.score","set.size","set.mean","set.sd")]
 
+message("sets with size < ",Lowersetsize, " are not considered" )
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 write.table(MatOut,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t")
 write.table(LocalOut,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t")

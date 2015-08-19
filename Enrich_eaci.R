@@ -3,8 +3,9 @@ options <- commandArgs(trailingOnly = TRUE)
 print(options)
 File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
+Lowersetsize=options[3]
 if(length(options)<2)Local=NULL
-
+if(length(options)<3)Lowersetsize=10
 
 # csv or txt
 tmp=strsplit(File, split="\\.")[[1]]
@@ -45,12 +46,12 @@ if(!is.null(Local)){
 library(EACI)
 Score=In[[1]]
 names(Score)=rownames(In)
-Out=eacitest(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List,iter=10)
+Out=eacitest(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List,iter=10, minsetsize=Lowersetsize)
 
 Mat=Out[[1]][,c("Term","set.mean","set.sd","set.size","pval")]
 Mat$p.adj <- p.adjust(Mat$pval, method="BH")
 MatOut=Mat[order(Mat$pval),c("Term","pval","p.adj","set.size","set.mean","set.sd")]
-
+message("sets with size < ",Lowersetsize, " are not considered" )
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 write.table(MatOut,file=paste0(prefix,"_EACIenrichment_allsets.txt"),sep="\t")
 write.table(LocalOut,file=paste0(prefix,"_EACIenrichment_localsets.txt"), sep="\t")
