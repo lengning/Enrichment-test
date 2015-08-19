@@ -58,7 +58,7 @@ Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
 MatOut=Mat[order(Mat$p.value),c("Term","p.value","p.adj","z.score","set.size","set.mean","set.sd")]
 
-message("sets with size < ",Lowersetsize, "or > ", Uppersetsize, " are not considered" )
+message("sets with size < ",Lowersetsize, " or > ", Uppersetsize, " are not considered" )
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 write.table(MatOut,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t")
 write.table(LocalOut,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t")
