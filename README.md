@@ -56,7 +56,8 @@ Example commands to run the script:
 - Rscript Enrich_eaci.R ExampleLoading.txt MarkerLists.txt
 - Rscript Enrich_eaci.R ExampleLoading.csv 
 - Rscript Enrich_eaci.R ExampleLoading.csv MarkerLists.csv 20
-- 
+
+
 Outputs
 
 XX_EACIenrichment_allsets.txt
