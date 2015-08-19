@@ -72,6 +72,7 @@ Th EASE scores implementation is available in EACI_0.0.1.tar.gz as well.
 
 Example commands to run the script:
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv MarkerLists.csv
+- Rscript Enrich_eaci.R ExampleLoading_binary.csv
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv MarkerLists.csv 20
 
 Note the input file for EASE score calculation should contains binary scores. 1 for Significant and 0 for non-significant
