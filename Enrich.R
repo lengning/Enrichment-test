@@ -60,8 +60,11 @@ MatOut=Mat[order(Mat$p.value),c("Term","p.value","p.adj","z.score","set.size","s
 
 message("sets with size < ",Lowersetsize, " or > ", Uppersetsize, " are not considered" )
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
-write.table(MatOut,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t")
-write.table(LocalOut,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t")
+MatOut2 <-  cbind(rownames(MatOut), MatOut)
+LocalOut2 <- cbind(rownames(LocalOut), LocalOut)
+colnames(MatOut2)[1] = colnames(LocalOut2) = "GO_ID"
+write.table(MatOut2,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t", row.names=F)
+write.table(LocalOut2,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t", row.names=F)
 
 
 
