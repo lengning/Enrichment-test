@@ -62,7 +62,7 @@ message("sets with size < ",Lowersetsize, " or > ", Uppersetsize, " are not cons
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 MatOut2 <-  cbind(rownames(MatOut), MatOut)
 LocalOut2 <- cbind(rownames(LocalOut), LocalOut)
-colnames(MatOut2)[1] = colnames(LocalOut2) = "GO_ID"
+colnames(MatOut2)[1] = colnames(LocalOut2)[1] = "GO_ID"
 write.table(MatOut2,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t", row.names=F)
 write.table(LocalOut2,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t", row.names=F)
 
