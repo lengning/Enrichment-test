@@ -3,8 +3,8 @@ options <- commandArgs(trailingOnly = TRUE)
 print(options)
 File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
-Lowersetsize=options[3]
-Uppersetsize=options[4]
+Lowersetsize=as.numeric(options[3])
+Uppersetsize=as.numeric(options[4])
 if(Local=="NULL" | length(options)<2 ) Local <- NULL
 if(length(options)<3)Lowersetsize=10
 if(length(options)<4)Uppersetsize=800
