@@ -77,6 +77,7 @@ Example commands to run the script:
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv MarkerLists.csv 20
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv MarkerLists.csv 20 500
+- Rscript Enrich_eaci.R ExampleLoading_binary.csv NULL 20 500
 
 Note the input file for EASE score calculation should contains binary scores. 1 for Significant and 0 for non-significant
 
