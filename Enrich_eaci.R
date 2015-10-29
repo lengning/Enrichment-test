@@ -8,6 +8,7 @@ Uppersetsize=options[4]
 if(length(options)<2)Local=NULL
 if(length(options)<3)Lowersetsize=10
 if(length(options)<4)Uppersetsize=800
+if(Local=="NULL") Local <- NULL
 
 
 # csv or txt
