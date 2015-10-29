@@ -5,10 +5,10 @@ File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
 Lowersetsize=options[3]
 Uppersetsize=options[4]
-if(length(options)<2)Local=NULL
+if(Local=="NULL" | length(options)<2 ) Local <- NULL
 if(length(options)<3)Lowersetsize=10
 if(length(options)<4)Uppersetsize=800
-if(Local=="NULL") Local <- NULL
+
 
 # csv or txt
 tmp=strsplit(File, split="\\.")[[1]]
