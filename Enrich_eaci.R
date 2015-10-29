@@ -3,8 +3,8 @@ options <- commandArgs(trailingOnly = TRUE)
 print(options)
 File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
-Lowersetsize=options[3]
-Uppersetsize=options[4]
+Lowersetsize=as.numeric(options[3])
+Uppersetsize=as.numeric(options[4])
 if(Local=="NULL" | length(options)<2 ) Local <- NULL
 if(length(options)<3)Lowersetsize=10
 if(length(options)<4)Uppersetsize=800
@@ -63,7 +63,7 @@ LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 
 MatOut2 <-  cbind(rownames(MatOut), MatOut)
 LocalOut2 <- cbind(rownames(LocalOut), LocalOut)
-colnames(MatOut2)[1] = colnames(LocalOut2) = "GO_ID"
+colnames(MatOut2)[1] = colnames(LocalOut2)[1] = "GO_ID"
 write.table(MatOut2,file=paste0(prefix,"_EACIenrichment_allsets.txt"),sep="\t", row.names=F)
 write.table(LocalOut2,file=paste0(prefix,"_EACIenrichment_localsets.txt"), sep="\t", row.names=F)
 
