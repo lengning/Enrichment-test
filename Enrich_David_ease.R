@@ -63,7 +63,7 @@ MatOut=Mat[order(Mat$pval),c("Term","pval","p.adj","set.size")]
 LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
 MatOut2 <-  cbind(rownames(MatOut), MatOut)
 LocalOut2 <- cbind(rownames(LocalOut), LocalOut)
-colnames(MatOut2)[1] = colnames(LocalOut2) = "GO_ID"
+colnames(MatOut2)[1] = colnames(LocalOut2)[1] = "GO_ID"
 write.table(MatOut2,file=paste0(prefix,"_DavidEASEenrichment_allsets.txt"),sep="\t", row.names=F)
 write.table(LocalOut2,file=paste0(prefix,"_DavidEASEenrichment_localsets.txt"), sep="\t", row.names=F)
 
