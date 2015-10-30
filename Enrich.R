@@ -40,8 +40,13 @@ if(!is.null(Local)){
 		cat("\n Read in tab delimited file (gene list)\n")
 		ListIn=read.table(Local,stringsAsFactors=F,row.names=1)
 	}
-
+	if(nrow(ListIn)>1){
 	List=sapply(1:nrow(ListIn),function(i)setdiff(as.vector(ListIn[i,]),c(""," ")))
+	}
+	if(nrow(ListIn)==1) {
+		List=vector("list",1)
+		List[[1]]=setdiff(unlist(ListIn),c(""," "))}
+
 	names(List)=rownames(ListIn)
 
 } else List=NULL
@@ -58,11 +63,13 @@ Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
 MatOut=Mat[order(Mat$p.value),c("Term","p.value","p.adj","z.score","set.size","set.mean","set.sd")]
 
+
 message("sets with size < ",Lowersetsize, " or > ", Uppersetsize, " are not considered" )
-LocalOut=MatOut[which(is.na(MatOut[,"Term"])),]
+LocalOut <- MatOut[which(is.na(MatOut[,"Term"])),]
 MatOut2 <-  cbind(rownames(MatOut), MatOut)
 LocalOut2 <- cbind(rownames(LocalOut), LocalOut)
 colnames(MatOut2)[1] = colnames(LocalOut2)[1] = "GO_ID"
+
 write.table(MatOut2,file=paste0(prefix,"_enrichment_allsets.txt"),sep="\t", row.names=F)
 write.table(LocalOut2,file=paste0(prefix,"_enrichment_localsets.txt"), sep="\t", row.names=F)
 

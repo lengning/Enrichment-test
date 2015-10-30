@@ -41,7 +41,12 @@ if(!is.null(Local)){
 		ListIn=read.table(Local,stringsAsFactors=F,row.names=1)
 	}
 
-	List=sapply(1:nrow(ListIn),function(i)setdiff(as.vector(ListIn[i,]),c(""," ")))
+  if(nrow(ListIn)>1){
+  List=sapply(1:nrow(ListIn),function(i)setdiff(as.vector(ListIn[i,]),c(""," ")))
+  }
+  if(nrow(ListIn)==1) {
+    List=vector("list",1)
+    List[[1]]=setdiff(unlist(ListIn),c(""," "))}
 	names(List)=rownames(ListIn)
 
 } else List=NULL
