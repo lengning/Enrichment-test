@@ -53,6 +53,7 @@ Out=eacitest(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List,iter=10,
 
 Mat=Out[[1]][,c("Term","set.mean","set.sd","set.size","pval")]
 Mat$p.adj <- p.adjust(Mat$pval, method="BH")
+Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
 MatOut=Mat[order(Mat$pval),c("Term","pval","p.adj","set.size","set.mean","set.sd")]
 message("sets with size < ",Lowersetsize, " or > ", Uppersetsize, " are not considered" )
