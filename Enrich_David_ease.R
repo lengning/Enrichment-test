@@ -54,6 +54,7 @@ Out=easetest(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List, minsets
 
 Mat=Out$setscores[,c("Term","set.size","pval")]
 Mat$p.adj <- p.adjust(Mat$pval, method="BH")
+Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
 message("sets with size < ",Lowersetsize, " or > ", Uppersetsize, " are not considered" )
 MatOut=Mat[order(Mat$pval),c("Term","pval","p.adj","set.size")]
