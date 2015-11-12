@@ -11,6 +11,8 @@ source("http://bioconductor.org/biocLite.R")
 
 biocLite("org.Hs.eg.db”)
 
+biocLite("org.Mm.eg.db”)
+
 biocLite("GO.db")
 
 
