@@ -66,7 +66,10 @@ Out=allez(score=Score,lib=lib.v,idtype="SYMBOL",locallist=List)
 Mat=Out$setscores[,c("Term","set.mean","set.sd","set.size","z.score")]
 message(c("one tailed p value?", side))
 if(side=="F")Mat$p.value <- pnorm(-abs(Mat$z.score))# two tailed
-if(side=="T")Mat$p.value <- pnorm(-Mat$z.score)# one tailed
+if(side=="T"){
+	prb <- pnorm(Mat$z.score)# one tailed
+	Mat$p.value <- ifelse(1-prb>prb, prb, 1-prb)*2
+}
 Mat$p.adj <- p.adjust(Mat$p.value, method="BH")
 Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
