@@ -22,6 +22,7 @@ Example commands to run the script:
 - Rscript Enrich.R ExampleLoading.csv 
 - Rscript Enrich.R ExampleLoading.txt MarkerLists.txt 20
 - Rscript Enrich.R ExampleLoading.txt MarkerLists.txt 20 500
+- Rscript Enrich.R ExampleLoading.txt MarkerLists.txt 20 500 mouse T
 
 The 3rd term indicates the name of the loadings (or other scores). 
 The file should contain only one column. Row names should be gene names. Each entry represents loading (or score) 
@@ -35,6 +36,10 @@ For lists with length M - N, the M+1, ..., N's column in that row should be fill
 is not specified, only GO terms will be considered.
 
 The 5th (6th) term defines the threshold to filter out small(large) sets. Default is 10 (800). Sets that are smaller (larger) than the threshold are not considered.
+
+The 7th term defines what annotation package to use. It could be either 'human' or 'mouse'
+
+The 8th term defines whether one-tailed p value should be calculated. If the input values are absolute values, then it should be specified as "T". Otherwise it should be specified as "F", in which case two-tailed p values will be calculated.
 
 Outputs:
 
@@ -60,7 +65,7 @@ Example commands to run the script:
 - Rscript Enrich_eaci.R ExampleLoading.csv 
 - Rscript Enrich_eaci.R ExampleLoading.csv MarkerLists.csv 20
 - Rscript Enrich_eaci.R ExampleLoading.csv MarkerLists.csv 20 500
-
+- Rscript Enrich_eaci.R ExampleLoading.csv MarkerLists.csv 20 500 mouse T
 
 Outputs
 
@@ -80,6 +85,8 @@ Example commands to run the script:
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv MarkerLists.csv 20
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv MarkerLists.csv 20 500
 - Rscript Enrich_eaci.R ExampleLoading_binary.csv NULL 20 500
+- Rscript Enrich_eaci.R ExampleLoading_binary.csv NULL 20 500 mouse T
+ 
 
 Note the input file for EASE score calculation should contains binary scores. 1 for Significant and 0 for non-significant
 
