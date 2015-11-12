@@ -6,10 +6,14 @@ Local=options[2] # local list; rows are lists
 Lowersetsize=as.numeric(options[3])
 Uppersetsize=as.numeric(options[4])
 db.v <- options[5]
+side <- options[6]
+
 if(Local=="NULL" | length(options)<2 ) Local <- NULL
 if(length(options)<3)Lowersetsize=10
 if(length(options)<4)Uppersetsize=800
 if(length(options)<5)db.v <- "human" # annotation
+if(length(options)<6)side <- "F"  # whether perform one tailed test
+
 message(c("annotation: ", db.v))
 if(db.v=="human")lib.v <- "org.Hs.eg"
 if(db.v=="mouse")lib.v <- "org.Mm.eg"
@@ -61,7 +65,13 @@ names(Score)=rownames(In)
 Out=eacitest(score=Score,lib=lib.v,idtype="SYMBOL",locallist=List,iter=10, minsetsize=Lowersetsize)
 
 Mat=Out[[1]][,c("Term","set.mean","set.sd","set.size","pval")]
-Mat$p.adj <- p.adjust(Mat$pval, method="BH")
+p.val.raw <- Mat$pval
+if(side=="F") p.val <- p.val.raw
+if(side=="T"){
+	tmp <- (Mat$set.mean-Out$aux$meanbg)/sd(Mat$set.mean)
+	p.val <- pnorm(-abs(tmp))
+	}	
+Mat$p.adj <- p.adjust(p.val, method="BH")
 Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
 MatOut=Mat[order(Mat$pval),c("Term","pval","p.adj","set.size","set.mean","set.sd")]
