@@ -39,7 +39,7 @@ The 5th (6th) term defines the threshold to filter out small(large) sets. Defaul
 
 The 7th term defines what annotation package to use. It could be either 'human' or 'mouse'
 
-The 8th term defines whether one-tailed p value should be calculated. If the input values are absolute values, then it should be specified as "T". Otherwise it should be specified as "F", in which case two-tailed p values will be calculated. This option is only valid in the allez implementation.
+The 8th term defines whether one-tailed p value should be calculated. If the input values are absolute values, then it should be specified as "T". Otherwise it should be specified as "F", in which case two-tailed p values will be calculated. This option is only valid in the allez implementation (not in EACI or EASE).
 
 Outputs:
 
