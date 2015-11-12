@@ -5,10 +5,17 @@ File=options[1] # score file, rows are genes
 Local=options[2] # local list; rows are lists
 Lowersetsize=as.numeric(options[3])
 Uppersetsize=as.numeric(options[4])
+db.v <- options[5]
+side <- options[6]
 if(Local=="NULL" | length(options)<2 ) Local <- NULL
-if(length(options)<3)Lowersetsize=10
-if(length(options)<4)Uppersetsize=800
-
+if(length(options)<3)Lowersetsize <- 10
+if(length(options)<4)Uppersetsize <- 800
+if(length(options)<5)db.v <- "human" # annotation
+if(length(options)<6)side <- "F"	# whether perform one tailed test
+message(c("annotation: ", db.v))
+if(db.v=="human")lib.v <- "org.Hs.eg"
+if(db.v=="mouse")lib.v <- "org.Mm.eg"
+		
 
 # csv or txt
 tmp=strsplit(File, split="\\.")[[1]]
@@ -54,10 +61,12 @@ if(!is.null(Local)){
 library(allez)
 Score=In[[1]]
 names(Score)=rownames(In)
-Out=allez(score=Score,lib="org.Hs.eg",idtype="SYMBOL",locallist=List)
+Out=allez(score=Score,lib=lib.v,idtype="SYMBOL",locallist=List)
 
 Mat=Out$setscores[,c("Term","set.mean","set.sd","set.size","z.score")]
-Mat$p.value <- pnorm(-abs(Mat$z.score))
+message(c("one tailed p value?", side))
+if(side=="F")Mat$p.value <- pnorm(-abs(Mat$z.score))# two tailed
+if(side=="T")Mat$p.value <- pnorm(-Mat$z.score)# one tailed
 Mat$p.adj <- p.adjust(Mat$p.value, method="BH")
 Mat <- Mat[which(Mat$set.size>Lowersetsize),]
 Mat <- Mat[which(Mat$set.size<Uppersetsize),]
