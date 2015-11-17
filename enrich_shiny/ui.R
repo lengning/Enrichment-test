@@ -11,7 +11,7 @@ shinyUI(pageWithSidebar(
   # Sidebar with sliders that demonstrate various available options
   sidebarPanel(width=9,
     # file
-		fileInput("filename", label = "File input (support .csv, .xls, .txt, .tab).
+		fileInput("filename", label = "File input (support tab delimited file or csv).
 							Input should contain two columns - the first column contains gene names
 							and the second column contains gene scores. The gene scores could be
 							binary - in which 1 represents on and 0 represents off; or continuous - 
@@ -55,21 +55,19 @@ shinyUI(pageWithSidebar(
 		
 
 		column(4,
-		# output dir
-		#textInput("Outdir", label = "Output directory (default is the home directory)",
-		#        value = "~/"),
-		 br(),
-		 h1(""),
-		 h1(""),
+		# pval cutoff
+		 numericInput("pcut",
+					    label = "adjust pvalue cutoff",
+							   value = 0.1),
+			br(),
+		# outdir
 		 shinyDirButton('Outdir', 'output folder select', 'Please select a folder to store the output files'),
-		#shinyDirButton('folder', 'Folder select', 'Please select a folder', FALSE),
-		#verbatimTextOutput('filepaths')),
-    h1(""),
-  	h1(""),
+  	# h1(""),
+		 br(),
 	# export normalzied matrix
 	textInput("exFileName", 
 	label = "prefix of the export files", 
-		        value = "enriched_results")),
+		        value = "output_results")),
 	
 												
 		actionButton("Submit","Submit for processing")
