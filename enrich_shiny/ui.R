@@ -67,7 +67,7 @@ shinyUI(pageWithSidebar(
     h1(""),
   	h1(""),
 	# export normalzied matrix
-	textInput("exNormFileName", 
+	textInput("exFileName", 
 	label = "prefix of the export files", 
 		        value = "enriched_results")),
 	
